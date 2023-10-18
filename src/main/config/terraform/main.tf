@@ -131,14 +131,14 @@ resource "aws_db_instance" "urotaxidbec2" {
   db_subnet_group_name   = aws_db_subnet_group.urotaxidbsngrp.id
 }
 
-resource "aws_key_pair" "urotaxikp" {
+resource "aws_key_pair" "urotaxi_kp" {
   public_key = var.urotaxi_public_key
-  key_name   = "urotaxikp_name"
+  key_name   = "urotaxikpname"
 }
 
 resource "aws_instance" "urotaxiec2" {
   security_groups             = [aws_security_group.urotaxijavaserversg.id]
-  key_name                    = aws_key_pair.urotaxikp.id
+  key_name                    = aws_key_pair.urotaxi_kp.key_name
   subnet_id                   = aws_subnet.urotaxi_pubsn1.id
   ami                         = var.ami
   instance_type               = var.instance_shape
